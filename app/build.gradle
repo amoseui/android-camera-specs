@@ -22,7 +22,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
@@ -38,4 +37,13 @@ dependencies {
 
 jacoco {
     toolVersion = "0.8.5"
+}
+
+kotlinter {
+    ignoreFailures = false
+    indentSize = 4
+    reporters = ['html']
+    experimentalRules = false
+    disabledRules = ["no-wildcard-imports"]
+    fileBatchSize = 30
 }
