@@ -3,18 +3,16 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 apply plugin: "jacoco-android"
+apply plugin: "org.jmailen.kotlinter"
 
 android {
     compileSdkVersion 29
-
-
     defaultConfig {
         applicationId "com.amoseui.camerainfo"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -24,7 +22,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
@@ -42,3 +39,11 @@ jacoco {
     toolVersion = "0.8.5"
 }
 
+kotlinter {
+    ignoreFailures = false
+    indentSize = 4
+    reporters = ['html']
+    experimentalRules = false
+    disabledRules = ["no-wildcard-imports"]
+    fileBatchSize = 30
+}
