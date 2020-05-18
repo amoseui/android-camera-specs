@@ -1,51 +1,35 @@
 package com.amoseui.camerainfo.camerax
 
+import android.annotation.SuppressLint
+import android.content.Context
+import androidx.camera.camera2.Camera2Config
 import androidx.camera.core.CameraSelector
-import androidx.camera.core.ImageCapture
-import androidx.camera.core.Preview
-import androidx.camera.extensions.*
+import androidx.camera.core.CameraX
+import androidx.camera.extensions.ExtensionsManager
 
 class ExtensionsChecker {
 
-    fun getCameraInfoFromCameraX() {
+    @SuppressLint("RestrictedApi")
+    fun getCameraInfoFromCameraX(context: Context): Map<Int, MutableSet<String>> {
         val availability = ExtensionsManager.init().get()
         if (availability != ExtensionsManager.ExtensionsAvailability.LIBRARY_AVAILABLE) {
-            return
+            return emptyMap()
         }
 
-        // Need to check below lines with devices which have Extensions
-        val imageCaptureBuilder = ImageCapture.Builder()
-        val imageCaptureExtenderList = listOf(
-            AutoImageCaptureExtender.create(imageCaptureBuilder),
-            BeautyImageCaptureExtender.create(imageCaptureBuilder),
-            BokehImageCaptureExtender.create(imageCaptureBuilder),
-            HdrImageCaptureExtender.create(imageCaptureBuilder),
-            NightImageCaptureExtender.create(imageCaptureBuilder)
+        CameraX.initialize(context, Camera2Config.defaultConfig())
+        val extensionsData = mapOf(
+            CameraSelector.LENS_FACING_BACK to mutableSetOf<String>(),
+            CameraSelector.LENS_FACING_FRONT to mutableSetOf()
         )
-
-        val previewBuilder = Preview.Builder()
-        val previewExtenderList = listOf(
-            AutoPreviewExtender.create(previewBuilder),
-            BeautyPreviewExtender.create(previewBuilder),
-            BokehPreviewExtender.create(previewBuilder),
-            HdrPreviewExtender.create(previewBuilder),
-            NightPreviewExtender.create(previewBuilder)
-        )
-
-        val cameraSelector = CameraSelector.Builder()
-            .requireLensFacing(CameraSelector.LENS_FACING_FRONT)
-            .build()
-        imageCaptureExtenderList.forEach {
-            val isAvailable = it.isExtensionAvailable(cameraSelector)
-            if (isAvailable) {
-                println(isAvailable)
+        extensionsData.forEach {
+            ExtensionsManager.EffectMode.values().forEach { effectMode ->
+                if (ExtensionsManager.isExtensionAvailable(effectMode, it.key)) {
+                    it.value.add(effectMode.name)
+                }
             }
         }
-        previewExtenderList.forEach {
-            val isAvailable = it.isExtensionAvailable(cameraSelector)
-            if (isAvailable) {
-                println(isAvailable)
-            }
-        }
+        CameraX.shutdown()
+
+        return extensionsData
     }
 }
