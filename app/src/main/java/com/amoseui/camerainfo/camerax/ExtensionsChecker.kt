@@ -1,5 +1,6 @@
 package com.amoseui.camerainfo.camerax
 
+import android.content.Context
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.Preview
@@ -7,8 +8,8 @@ import androidx.camera.extensions.*
 
 class ExtensionsChecker {
 
-    fun getCameraInfoFromCameraX() {
-        val availability = ExtensionsManager.init().get()
+    fun getCameraInfoFromCameraX(context: Context) {
+        val availability = ExtensionsManager.init(context).get()
         if (availability != ExtensionsManager.ExtensionsAvailability.LIBRARY_AVAILABLE) {
             return
         }
