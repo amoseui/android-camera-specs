@@ -18,9 +18,6 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
-
-    alias(libs.plugins.io.gitlab.arturbosch.detekt)
-    alias(libs.plugins.org.jlleitschuh.gradle.ktlint)
 }
 
 android {
@@ -81,16 +78,4 @@ dependencies {
 
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
-}
-
-detekt {
-    toolVersion = "1.18.1"
-    config = files("config/detekt/detekt.yml")
-    allRules = true
-    buildUponDefaultConfig = false
-    reports {
-        html {
-            enabled = true
-        }
-    }
 }

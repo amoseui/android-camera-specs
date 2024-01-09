@@ -20,6 +20,7 @@ plugins {
     alias(libs.plugins.androidApplication) apply false
     alias(libs.plugins.kotlinAndroid) apply false
     alias(libs.plugins.spotless)
+    alias(libs.plugins.io.gitlab.arturbosch.detekt)
 }
 
 subprojects {
@@ -61,6 +62,18 @@ subprojects {
             )
             trimTrailingWhitespace()
             endWithNewline()
+        }
+    }
+}
+
+detekt {
+    toolVersion = "1.18.1"
+    config = files("config/detekt/detekt.yml")
+    allRules = true
+    buildUponDefaultConfig = false
+    reports {
+        html {
+            enabled = true
         }
     }
 }
