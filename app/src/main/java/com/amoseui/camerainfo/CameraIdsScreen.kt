@@ -6,10 +6,11 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
 fun CameraIdsScreen(
-    viewModel: CameraIdsViewModel,
+    viewModel: CameraIdsViewModel = viewModel(),
 ) {
     val uiState = viewModel.uiState.collectAsState().value
     CameraIdsScreen(
