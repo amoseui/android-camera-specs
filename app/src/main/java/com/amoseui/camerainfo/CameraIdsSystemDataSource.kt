@@ -17,11 +17,13 @@
 package com.amoseui.camerainfo
 
 import android.content.Context
+import android.hardware.camera2.CameraManager
 import androidx.datastore.core.DataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class CameraIdsSystemDataSource(private val dataStore: DataStore<Camera>) {
+
         val cameraIdsStream: Flow<List<String>> = dataStore.data.map {
                 it.cameraIdsList
         }
@@ -36,5 +38,10 @@ class CameraIdsSystemDataSource(private val dataStore: DataStore<Camera>) {
                                 )
                                 .build()
                 }
+        }
+
+        private fun getCameraIds(context: Context): Array<String> {
+                val cameraManager = context.getSystemService(Context.CAMERA_SERVICE) as CameraManager
+                return cameraManager.cameraIdList
         }
 }

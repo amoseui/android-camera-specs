@@ -16,7 +16,10 @@
 
 package com.amoseui.camerainfo
 
+import kotlinx.coroutines.flow.Flow
+
 class CameraIdsRepository(private val dataSource: CameraIdsSystemDataSource) {
+
     val cameraIdsStream: Flow<List<String>> = dataSource.cameraIdsStream
 
     suspend fun refreshCameraIds() = dataSource.refreshCameraIds()
