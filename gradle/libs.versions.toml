@@ -14,6 +14,10 @@ lifecycle-ktx = "2.6.2"
 fragment-ktx = "1.6.2"
 navigation-ktx = "2.7.6"
 
+datastore = "1.0.0"
+
+protobuf-javalite = "3.19.1"
+
 timber = "5.0.1"
 
 junit = "4.13.2"
@@ -25,6 +29,7 @@ androidApplication = { id = "com.android.application", version.ref = "agp" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 io-gitlab-arturbosch-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
+protobuf =  { id = "com.google.protobuf", version = "0.9.4" }
 
 [libraries]
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
@@ -38,6 +43,10 @@ lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-view
 fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragment-ktx" }
 navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigation-ktx" }
 navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigation-ktx" }
+
+datastore = { group = "androidx.datastore", name = "datastore", version.ref = "datastore" }
+
+protobuf-javalite = { group = "com.google.protobuf", name = "protobuf-javalite", version.ref = "protobuf-javalite" }
 
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
 
