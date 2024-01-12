@@ -24,24 +24,24 @@ import kotlinx.coroutines.flow.map
 
 class CameraIdsSystemDataSource(private val dataStore: DataStore<Camera>) {
 
-        val cameraIdsStream: Flow<List<String>> = dataStore.data.map {
-                it.cameraIdsList
-        }
+    val cameraIdsStream: Flow<List<String>> = dataStore.data.map {
+        it.cameraIdsList
+    }
 
-        suspend fun refreshCameraIds() {
-                dataStore.updateData {
-                        it.toBuilder()
-                                .clearCameraIds()
-                                .addAllCameraIds(
+    suspend fun refreshCameraIds() {
+        dataStore.updateData {
+            it.toBuilder()
+                .clearCameraIds()
+                .addAllCameraIds(
 //                                        CameraIdsSystem.getCameraIds()
-                                        mutableListOf("0", "1", "2", "3")
-                                )
-                                .build()
-                }
+                    mutableListOf("0", "1", "2", "3"),
+                )
+                .build()
         }
+    }
 
-        private fun getCameraIds(context: Context): Array<String> {
-                val cameraManager = context.getSystemService(Context.CAMERA_SERVICE) as CameraManager
-                return cameraManager.cameraIdList
-        }
+    private fun getCameraIds(context: Context): Array<String> {
+        val cameraManager = context.getSystemService(Context.CAMERA_SERVICE) as CameraManager
+        return cameraManager.cameraIdList
+    }
 }

@@ -81,6 +81,7 @@ dependencies {
 
     implementation(libs.constraintlayout)
     implementation(libs.lifecycle.livedata.ktx)
+    implementation(libs.lifecycle.runtime.compose)
     implementation(libs.lifecycle.viewmodel.compose)
     implementation(libs.lifecycle.viewmodel.ktx)
 

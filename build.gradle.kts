@@ -37,7 +37,7 @@ subprojects {
         kotlin {
             target("**/*.kt")
             targetExclude("$buildDir/**/*.kt")
-            ktlint()
+            ktlint().editorConfigOverride(mapOf("ktlint_function_naming_ignore_when_annotated_with" to "Composable"))
             licenseHeaderFile(rootProject.file("spotless/spotless.license.kt"))
             trimTrailingWhitespace()
             endWithNewline()

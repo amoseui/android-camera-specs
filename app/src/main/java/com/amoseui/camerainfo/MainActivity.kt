@@ -16,9 +16,17 @@
 
 package com.amoseui.camerainfo
 
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.datastore.core.DataStore
+import androidx.datastore.dataStore
+
+val Context.cameraDataStore: DataStore<Camera> by dataStore(
+    fileName = "camera.proto",
+    serializer = CameraSerializer,
+)
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -16,14 +16,11 @@
 
 package com.amoseui.camerainfo
 
-import android.content.Context
 import androidx.datastore.core.CorruptionException
-import androidx.datastore.core.DataStore
 import androidx.datastore.core.Serializer
-import androidx.datastore.dataStore
+import com.google.protobuf.InvalidProtocolBufferException
 import java.io.InputStream
 import java.io.OutputStream
-import com.google.protobuf.InvalidProtocolBufferException
 
 object CameraSerializer : Serializer<Camera> {
     override val defaultValue: Camera = Camera.getDefaultInstance()
@@ -41,8 +38,3 @@ object CameraSerializer : Serializer<Camera> {
         output: OutputStream,
     ) = t.writeTo(output)
 }
-
-val Context.cameraDataStore: DataStore<Camera> by dataStore(
-    fileName = "camera.proto",
-    serializer = CameraSerializer,
-)
