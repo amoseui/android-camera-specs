@@ -29,7 +29,7 @@ android {
         minSdk = 21
         targetSdk = 34
         versionCode = 10
-        versionName = "0.1.0-dev"
+        versionName = "0.1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -47,6 +47,14 @@ android {
         }
     }
 
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.8"
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -60,17 +68,9 @@ android {
 }
 
 dependencies {
-    implementation(libs.appcompat)
-    implementation(libs.core.ktx)
-    implementation(libs.material)
-
-    implementation(libs.constraintlayout)
-    implementation(libs.lifecycle.livedata.ktx)
-    implementation(libs.lifecycle.viewmodel.ktx)
-
-    implementation(libs.fragment.ktx)
-    implementation(libs.navigation.fragment.ktx)
-    implementation(libs.navigation.ui.ktx)
+    implementation(libs.activity.compose)
+    implementation(libs.compose.material3)
+    implementation(libs.material3)
 
     implementation(libs.timber)
 
