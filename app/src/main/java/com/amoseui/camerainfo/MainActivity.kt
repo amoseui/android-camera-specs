@@ -20,7 +20,6 @@ import android.app.Activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -87,6 +86,7 @@ fun CameraInfoTopAppBar() {
             )
         },
     ) { innerPadding ->
-        Text(text = "contents", Modifier.padding(innerPadding))
+        val cameraResources = listOf(CameraResource("0"), CameraResource("1"), CameraResource("2"), CameraResource("3"))
+        CameraIds(cameraResources, innerPadding)
     }
 }
