@@ -72,9 +72,10 @@ dependencies {
     implementation(libs.activity.compose)
     implementation(libs.compose.material3)
     implementation(libs.compose.ui.tooling.preview)
-    implementation(libs.material3)
-
     implementation(libs.datastore)
+    implementation(libs.lifecycle.runtime.compose)
+    implementation(libs.lifecycle.viewmodel.compose)
+    implementation(libs.material3)
 
     implementation(libs.protobuf.javalite)
 

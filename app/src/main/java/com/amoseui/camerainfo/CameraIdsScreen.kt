@@ -16,10 +16,8 @@
 
 package com.amoseui.camerainfo
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -28,16 +26,19 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 @Composable
 fun CameraIdsScreen(
     cameraIdsViewModel: CameraIdsViewModel = viewModel(),
+    innerPadding: PaddingValues,
 ) {
     val uiState by cameraIdsViewModel.uiState.collectAsStateWithLifecycle()
     CameraIdsScreen(
         uiState = uiState,
+        innerPadding = innerPadding,
     )
 }
 
 @Composable
 fun CameraIdsScreen(
     uiState: CameraIdsUiState,
+    innerPadding: PaddingValues,
 ) {
     when (uiState) {
         is CameraIdsUiState.Loading -> {
@@ -46,29 +47,8 @@ fun CameraIdsScreen(
         is CameraIdsUiState.Success -> {
             CameraIds(
                 cameraResources = uiState.cameraResources,
+                innerPadding = innerPadding,
             )
         }
-    }
-}
-
-@Composable
-fun CameraIds(
-    cameraResources: List<CameraResource>,
-) {
-    LazyColumn {
-        items(cameraResources) {
-            CameraIdCard(
-                cameraResource = it,
-            )
-        }
-    }
-}
-
-@Composable
-fun CameraIdCard(
-    cameraResource: CameraResource,
-) {
-    Column {
-        Text(text = cameraResource.id)
     }
 }
