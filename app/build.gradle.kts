@@ -69,25 +69,10 @@ android {
 }
 
 dependencies {
-    implementation(libs.appcompat)
-    implementation(libs.core.ktx)
-    implementation(libs.material)
     implementation(libs.activity.compose)
-
-    implementation(libs.compose.compiler)
-    implementation(libs.compose.foundation)
-    implementation(libs.compose.material)
-    implementation(libs.compose.ui)
-
-    implementation(libs.constraintlayout)
-    implementation(libs.lifecycle.livedata.ktx)
-    implementation(libs.lifecycle.runtime.compose)
-    implementation(libs.lifecycle.viewmodel.compose)
-    implementation(libs.lifecycle.viewmodel.ktx)
-
-    implementation(libs.fragment.ktx)
-    implementation(libs.navigation.fragment.ktx)
-    implementation(libs.navigation.ui.ktx)
+    implementation(libs.compose.material3)
+    implementation(libs.compose.ui.tooling.preview)
+    implementation(libs.material3)
 
     implementation(libs.datastore)
 
