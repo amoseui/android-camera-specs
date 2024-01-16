@@ -22,19 +22,19 @@ import com.google.protobuf.InvalidProtocolBufferException
 import java.io.InputStream
 import java.io.OutputStream
 
-object CameraSerializer : Serializer<Camera> {
-    override val defaultValue: Camera = Camera.getDefaultInstance()
+object CameraDataSerializer : Serializer<CameraData> {
+    override val defaultValue: CameraData = CameraData.getDefaultInstance()
 
-    override suspend fun readFrom(input: InputStream): Camera {
+    override suspend fun readFrom(input: InputStream): CameraData {
         try {
-            return Camera.parseFrom(input)
+            return CameraData.parseFrom(input)
         } catch (exception: InvalidProtocolBufferException) {
             throw CorruptionException("Cannot read proto.", exception)
         }
     }
 
     override suspend fun writeTo(
-        t: Camera,
+        t: CameraData,
         output: OutputStream,
     ) = t.writeTo(output)
 }

@@ -37,9 +37,10 @@ class CameraIdsViewModel @Inject constructor(
     private val cameraIdsRepository: CameraIdsRepository,
 ) : ViewModel() {
     private val data: Flow<List<CameraResource>> = cameraIdsRepository.cameraIdsStream.map {
-        it.map { cameraId ->
+        it.map { camera ->
             CameraResource(
-                id = cameraId,
+                id = camera.cameraId,
+                type = CameraType.from(camera.type.ordinal)!!,
             )
         }
     }

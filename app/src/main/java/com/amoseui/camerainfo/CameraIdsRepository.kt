@@ -21,7 +21,7 @@ import javax.inject.Inject
 
 class CameraIdsRepository @Inject constructor(private val dataSource: CameraIdsSystemDataSource) {
 
-    val cameraIdsStream: Flow<List<String>> = dataSource.cameraIdsStream
+    val cameraIdsStream: Flow<List<CameraData.Camera>> = dataSource.cameraIdsStream
 
     suspend fun refreshCameraIds() = dataSource.refreshCameraIds()
 }

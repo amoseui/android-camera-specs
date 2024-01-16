@@ -68,5 +68,11 @@ fun CameraIdCard(
                 .padding(16.dp),
             textAlign = TextAlign.Center,
         )
+        Text(
+            text = "Type: ${cameraResource.type.name}",
+            modifier = Modifier
+                .padding(16.dp),
+            textAlign = TextAlign.Center,
+        )
     }
 }
