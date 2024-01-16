@@ -36,12 +36,9 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalView
 import androidx.datastore.core.DataStore
 import androidx.datastore.dataStore
+import dagger.hilt.android.AndroidEntryPoint
 
-val Context.cameraDataStore: DataStore<Camera> by dataStore(
-    fileName = "camera.proto",
-    serializer = CameraSerializer,
-)
-
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

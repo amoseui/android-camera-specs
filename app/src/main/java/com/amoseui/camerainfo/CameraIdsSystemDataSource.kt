@@ -19,17 +19,31 @@ package com.amoseui.camerainfo
 import android.content.Context
 import android.hardware.camera2.CameraManager
 import androidx.datastore.core.DataStore
+import androidx.datastore.dataStore
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class CameraIdsSystemDataSource(private val dataStore: DataStore<Camera>) {
+val Context.cameraDataStore: DataStore<Camera> by dataStore(
+    fileName = "camera.proto",
+    serializer = CameraSerializer,
+)
 
-    val cameraIdsStream: Flow<List<String>> = dataStore.data.map {
+//class CameraIdsSystemDataSource(private val dataStore: DataStore<Camera>) {
+
+class CameraIdsSystemDataSource @Inject constructor(
+    @ApplicationContext private val context: Context
+) {
+
+//class CameraIdsSystemDataSource(private val context: Context) {
+
+    val cameraIdsStream: Flow<List<String>> = context.cameraDataStore.data.map {
         it.cameraIdsList
     }
 
     suspend fun refreshCameraIds() {
-        dataStore.updateData {
+        context.cameraDataStore.updateData {
             it.toBuilder()
                 .clearCameraIds()
                 .addAllCameraIds(

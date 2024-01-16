@@ -19,6 +19,8 @@
 plugins {
     alias(libs.plugins.androidApplication) apply false
     alias(libs.plugins.kotlinAndroid) apply false
+    alias(libs.plugins.kotlinKapt) apply false
+    alias(libs.plugins.hilt) apply false
     alias(libs.plugins.spotless)
     alias(libs.plugins.io.gitlab.arturbosch.detekt)
 }
