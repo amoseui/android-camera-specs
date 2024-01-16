@@ -16,14 +16,12 @@
 
 package com.amoseui.camerainfo
 
-import android.app.Application
-import dagger.hilt.android.HiltAndroidApp
-import timber.log.Timber
+import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-@HiltAndroidApp
-class CameraInfoApplication : Application() {
-    override fun onCreate() {
-        super.onCreate()
-        Timber.plant(Timber.DebugTree())
-    }
+class CameraIdsRepository @Inject constructor(private val dataSource: CameraIdsSystemDataSource) {
+
+    val cameraIdsStream: Flow<List<String>> = dataSource.cameraIdsStream
+
+    suspend fun refreshCameraIds() = dataSource.refreshCameraIds()
 }
