@@ -36,7 +36,9 @@ val Context.cameraDataStore: DataStore<CameraData> by dataStore(
 class CameraIdsSystemDataSource @Inject constructor(
     @ApplicationContext private val context: Context,
 ) {
-    val cameraIdsStream: Flow<List<CameraData.Camera>> = context.cameraDataStore.data.map { it.camerasList }
+    val cameraIdsStream: Flow<List<CameraData.Camera>> = context.cameraDataStore.data.map {
+        it.camerasList
+    }
 
     suspend fun refreshCameraIds() {
         context.cameraDataStore.updateData {
