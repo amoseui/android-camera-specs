@@ -31,7 +31,7 @@ val Context.cameraDataStore: DataStore<Camera> by dataStore(
 )
 
 class CameraIdsSystemDataSource @Inject constructor(
-    @ApplicationContext private val context: Context
+    @ApplicationContext private val context: Context,
 ) {
     val cameraIdsStream: Flow<List<String>> = context.cameraDataStore.data.map {
         it.cameraIdsList

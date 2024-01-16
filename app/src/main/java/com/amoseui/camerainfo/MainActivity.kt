@@ -17,7 +17,6 @@
 package com.amoseui.camerainfo
 
 import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -34,8 +33,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalView
-import androidx.datastore.core.DataStore
-import androidx.datastore.dataStore
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
