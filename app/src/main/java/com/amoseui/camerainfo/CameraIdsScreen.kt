@@ -30,6 +30,7 @@ fun CameraIdsScreen(
     cameraIdsViewModel: CameraIdsViewModel = hiltViewModel(),
     innerPadding: PaddingValues,
 ) {
+    cameraIdsViewModel.getCameraIds()
     val uiState by cameraIdsViewModel.uiState.collectAsStateWithLifecycle()
     CameraIdsScreen(
         uiState = uiState,

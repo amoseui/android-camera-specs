@@ -30,14 +30,9 @@ val Context.cameraDataStore: DataStore<Camera> by dataStore(
     serializer = CameraSerializer,
 )
 
-//class CameraIdsSystemDataSource(private val dataStore: DataStore<Camera>) {
-
 class CameraIdsSystemDataSource @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
-
-//class CameraIdsSystemDataSource(private val context: Context) {
-
     val cameraIdsStream: Flow<List<String>> = context.cameraDataStore.data.map {
         it.cameraIdsList
     }
@@ -47,8 +42,7 @@ class CameraIdsSystemDataSource @Inject constructor(
             it.toBuilder()
                 .clearCameraIds()
                 .addAllCameraIds(
-//                                        CameraIdsSystem.getCameraIds()
-                    mutableListOf("0", "1", "2", "3"),
+                    getCameraIds(context).toMutableList(),
                 )
                 .build()
         }

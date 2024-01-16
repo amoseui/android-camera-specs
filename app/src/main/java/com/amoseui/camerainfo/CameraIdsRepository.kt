@@ -22,7 +22,6 @@ import androidx.datastore.dataStore
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-//class CameraIdsRepository(private val dataSource: CameraIdsSystemDataSource) {
 class CameraIdsRepository @Inject constructor(private val dataSource: CameraIdsSystemDataSource) {
 
     val cameraIdsStream: Flow<List<String>> = dataSource.cameraIdsStream

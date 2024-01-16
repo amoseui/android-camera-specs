@@ -51,7 +51,6 @@ class CameraIdsViewModel @Inject constructor(
         initialValue = CameraIdsUiState.Loading,
         started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5_000),
     )
-
     fun getCameraIds() {
         viewModelScope.launch {
             cameraIdsRepository.refreshCameraIds()
