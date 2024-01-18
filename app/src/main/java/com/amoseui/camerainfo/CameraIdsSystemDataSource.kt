@@ -17,7 +17,10 @@
 package com.amoseui.camerainfo
 
 import android.content.Context
+import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraManager
+import android.hardware.camera2.CameraMetadata
+import android.os.Build
 import androidx.datastore.core.DataStore
 import androidx.datastore.dataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -25,31 +28,54 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-val Context.cameraDataStore: DataStore<Camera> by dataStore(
+val Context.cameraDataStore: DataStore<CameraData> by dataStore(
     fileName = "camera.proto",
-    serializer = CameraSerializer,
+    serializer = CameraDataSerializer,
 )
 
 class CameraIdsSystemDataSource @Inject constructor(
     @ApplicationContext private val context: Context,
 ) {
-    val cameraIdsStream: Flow<List<String>> = context.cameraDataStore.data.map {
-        it.cameraIdsList
+    val cameraIdsStream: Flow<List<CameraData.Camera>> = context.cameraDataStore.data.map {
+        it.camerasList
     }
 
     suspend fun refreshCameraIds() {
         context.cameraDataStore.updateData {
             it.toBuilder()
-                .clearCameraIds()
-                .addAllCameraIds(
-                    getCameraIds(context).toMutableList(),
+                .clearCameras()
+                .addAllCameras(
+                    getCameraIds(context).map { camera ->
+                        CameraData.Camera.newBuilder()
+                            .setCameraId(camera.first)
+                            .setType(camera.second)
+                            .build()
+                    },
                 )
                 .build()
         }
     }
 
-    private fun getCameraIds(context: Context): Array<String> {
+    private fun getCameraIds(context: Context): List<Pair<String, CameraData.Type>> {
+        val list = mutableListOf<Pair<String, CameraData.Type>>()
         val cameraManager = context.getSystemService(Context.CAMERA_SERVICE) as CameraManager
-        return cameraManager.cameraIdList
+        cameraManager.cameraIdList.forEach {
+            val cameraCharacteristics = cameraManager.getCameraCharacteristics(it)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                if (cameraCharacteristics.get(CameraCharacteristics.REQUEST_AVAILABLE_CAPABILITIES)
+                        ?.contains(CameraMetadata.REQUEST_AVAILABLE_CAPABILITIES_LOGICAL_MULTI_CAMERA) == true
+                ) {
+                    list.add(it to CameraData.Type.TYPE_LOGICAL)
+                    cameraCharacteristics.physicalCameraIds.forEach { physicalCameraId ->
+                        list.add(physicalCameraId to CameraData.Type.TYPE_PHYSICAL)
+                    }
+                } else {
+                    list.add(it to CameraData.Type.TYPE_NORMAL)
+                }
+            } else {
+                list.add(it to CameraData.Type.TYPE_NORMAL)
+            }
+        }
+        return list
     }
 }

@@ -16,6 +16,18 @@
 
 package com.amoseui.camerainfo
 
+enum class CameraType(val value: Int) {
+    NORMAL(0),
+    LOGICAL(1),
+    PHYSICAL(2),
+    ;
+
+    companion object {
+        fun from(value: Int): CameraType? = entries.find { it.value == value }
+    }
+}
+
 data class CameraResource(
     val id: String,
+    val type: CameraType,
 )
