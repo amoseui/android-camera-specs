@@ -26,9 +26,11 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SuggestionChip
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
@@ -60,19 +62,19 @@ fun CameraIdCard(
             containerColor = MaterialTheme.colorScheme.surfaceVariant,
         ),
         modifier = Modifier
-            .size(width = 240.dp, height = 100.dp),
+            .size(width = 200.dp, height = 100.dp),
     ) {
         Text(
-            text = "Camera ID: ${cameraResource.id}",
+            text = "Camera ID ${cameraResource.id}",
             modifier = Modifier
                 .padding(16.dp),
             textAlign = TextAlign.Center,
         )
-        Text(
-            text = "Type: ${cameraResource.type.name}",
+        SuggestionChip(
             modifier = Modifier
-                .padding(16.dp),
-            textAlign = TextAlign.Center,
+                .padding(start = 16.dp, bottom = 16.dp),
+            label = { Text(cameraResource.type.name.lowercase().capitalize()) },
+            onClick = { },
         )
     }
 }
