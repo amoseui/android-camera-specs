@@ -30,7 +30,7 @@ jobs:
           ${{ runner.os }}-gradle-
 
     - name: Build with gradle
-      run: ./gradlew build createDebugUnitTestCoverageReport detekt
+      run: ./gradlew build jacocoTestCoverageReport detekt
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v2

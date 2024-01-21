@@ -21,6 +21,7 @@ import android.content.Context
 import android.hardware.camera2.CameraManager
 import android.os.Build
 import androidx.test.core.app.ApplicationProvider
+import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
@@ -31,6 +32,7 @@ import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.shadows.ShadowCameraCharacteristics
 
+@HiltAndroidTest
 @Config(sdk = [Build.VERSION_CODES.TIRAMISU])
 @RunWith(RobolectricTestRunner::class)
 class CameraIdsRepositoryTest {
