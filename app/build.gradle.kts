@@ -21,6 +21,7 @@ plugins {
     alias(libs.plugins.protobuf)
     kotlin("kapt")
     alias(libs.plugins.hilt)
+    jacoco
 }
 
 android {
@@ -46,7 +47,6 @@ android {
             )
         }
         debug {
-            enableUnitTestCoverage = true
         }
     }
 
@@ -68,6 +68,13 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+            isReturnDefaultValues = true
+        }
+    }
 }
 
 dependencies {
@@ -87,6 +94,11 @@ dependencies {
     implementation(libs.timber)
 
     testImplementation(libs.junit)
+    testImplementation(libs.kotlin.coroutines.test)
+    testImplementation(libs.test.core)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.hilt.android.testing)
+    kaptTest(libs.hilt.android.compiler)
 
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -109,4 +121,48 @@ protobuf {
             }
         }
     }
+}
+
+tasks.withType<Test>().configureEach {
+    extensions.configure<JacocoTaskExtension> {
+        isIncludeNoLocationClasses = true
+        excludes = listOf("jdk.internal.*")
+    }
+}
+
+tasks.register<JacocoReport>(name = "jacocoTestCoverageReport") {
+    dependsOn("testDebugUnitTest")
+
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+    }
+
+    sourceDirectories.setFrom(files("${project.projectDir}/src/main/java", "${project.buildDir}/generated/source/proto/debug/java"))
+
+    val fileFilter =
+        listOf(
+            "**/R.class",
+            "**/R$*.class",
+            "**/BuildConfig.*",
+            "**/Manifest*.*",
+            "**/*Test*.*",
+            "android/**/*.*",
+            "**/*Hilt*",
+            "**/hilt/**",
+        )
+
+    classDirectories.setFrom(
+        fileTree("${project.buildDir}/intermediates/classes/debug/transformDebugClassesWithAsm/dirs/com/amoseui/camerainfo") {
+            exclude(fileFilter)
+        },
+    )
+
+    executionData.setFrom(
+        fileTree(project.buildDir) {
+            include(
+                "jacoco/testDebugUnitTest.exec",
+            )
+        },
+    )
 }
