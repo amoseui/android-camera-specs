@@ -33,5 +33,5 @@ jobs:
       run: ./gradlew build jacocoTestCoverageReport detekt
 
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v2
+      uses: codecov/codecov-action@v3
 
