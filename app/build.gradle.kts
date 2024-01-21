@@ -87,6 +87,9 @@ dependencies {
     implementation(libs.timber)
 
     testImplementation(libs.junit)
+    testImplementation(libs.kotlin.coroutines.test)
+    testImplementation(libs.test.core)
+    testImplementation(libs.robolectric)
 
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)

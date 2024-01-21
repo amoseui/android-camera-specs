@@ -30,7 +30,6 @@ import androidx.compose.material3.SuggestionChip
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
@@ -73,7 +72,7 @@ fun CameraIdCard(
         SuggestionChip(
             modifier = Modifier
                 .padding(start = 16.dp, bottom = 16.dp),
-            label = { Text(cameraResource.type.name.lowercase().capitalize()) },
+            label = { Text(cameraResource.type.name.lowercase().replaceFirstChar(Char::uppercase)) },
             onClick = { },
         )
     }
