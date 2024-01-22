@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option java_package = "com.amoseui.cameraspecs";
+option java_package = "com.amoseui.cameraspecs.data.camera2";
 option java_multiple_files = true;
 
 message CameraData {

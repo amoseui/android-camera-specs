@@ -14,6 +14,7 @@ dependencyResolutionManagement {
     }
 }
 
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 rootProject.name = "CameraSpecs"
 include(":app")
-
+include(":data:camera2")

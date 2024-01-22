@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.amoseui.cameraspecs
+package com.amoseui.cameraspecs.data.camera2
 
 import android.app.Application
 import android.content.Context
@@ -42,7 +42,11 @@ class CameraIdsRepositoryTest {
         val cameraManager = ApplicationProvider.getApplicationContext<Application>().getSystemService(Context.CAMERA_SERVICE) as CameraManager
         shadowOf(cameraManager).addCamera("0", ShadowCameraCharacteristics.newCameraCharacteristics())
 
-        val repository = CameraIdsRepository(CameraIdsSystemDataSource(ApplicationProvider.getApplicationContext()))
+        val repository = CameraIdsRepository(
+            CameraIdsSystemDataSource(
+                ApplicationProvider.getApplicationContext(),
+            ),
+        )
         repository.refreshCameraIds()
 
         assertEquals("0", repository.cameraIdsStream.first()[0].cameraId)
