@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.amoseui.camerainfo
+package com.amoseui.cameraspecs
 
 import android.app.Application
 import android.content.Context

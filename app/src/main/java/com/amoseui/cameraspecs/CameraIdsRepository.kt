@@ -14,16 +14,14 @@
  * limitations under the License.
  */
 
-package com.amoseui.camerainfo
+package com.amoseui.cameraspecs
 
-import android.app.Application
-import dagger.hilt.android.HiltAndroidApp
-import timber.log.Timber
+import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-@HiltAndroidApp
-class CameraInfoApplication : Application() {
-    override fun onCreate() {
-        super.onCreate()
-        Timber.plant(Timber.DebugTree())
-    }
+class CameraIdsRepository @Inject constructor(private val dataSource: CameraIdsSystemDataSource) {
+
+    val cameraIdsStream: Flow<List<CameraData.Camera>> = dataSource.cameraIdsStream
+
+    suspend fun refreshCameraIds() = dataSource.refreshCameraIds()
 }

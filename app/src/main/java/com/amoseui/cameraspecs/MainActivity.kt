@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.amoseui.camerainfo
+package com.amoseui.cameraspecs
 
 import android.app.Activity
 import android.os.Bundle
@@ -81,7 +81,7 @@ fun CameraInfoTopAppBar() {
                 ),
                 title = {
                     Text(
-                        "Camera Info",
+                        "Camera Specs",
                     )
                 },
                 scrollBehavior = scrollBehavior,

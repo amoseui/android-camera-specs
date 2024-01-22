@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.amoseui.camerainfo
+package com.amoseui.cameraspecs
 
 import androidx.datastore.core.CorruptionException
 import androidx.datastore.core.Serializer
