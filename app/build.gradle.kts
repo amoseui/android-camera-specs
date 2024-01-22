@@ -25,11 +25,11 @@ plugins {
 }
 
 android {
-    namespace = "com.amoseui.camerainfo"
+    namespace = "com.amoseui.cameraspecs"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.amoseui.camerainfo"
+        applicationId = "com.amoseui.cameraspecs"
         minSdk = 21
         targetSdk = 34
         versionCode = 10
@@ -153,7 +153,7 @@ tasks.register<JacocoReport>(name = "jacocoTestCoverageReport") {
         )
 
     classDirectories.setFrom(
-        fileTree("${project.buildDir}/intermediates/classes/debug/transformDebugClassesWithAsm/dirs/com/amoseui/camerainfo") {
+        fileTree("${project.buildDir}/intermediates/classes/debug/transformDebugClassesWithAsm/dirs/com/amoseui/cameraspecs") {
             exclude(fileFilter)
         },
     )
