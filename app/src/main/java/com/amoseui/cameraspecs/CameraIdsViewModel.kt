@@ -30,16 +30,16 @@ import javax.inject.Inject
 
 sealed interface CameraIdsUiState {
     data object Loading : CameraIdsUiState
-    data class Success(val cameraResources: List<CameraResource>) : CameraIdsUiState
+    data class Success(val cameraIdResources: List<CameraIdResource>) : CameraIdsUiState
 }
 
 @HiltViewModel
 class CameraIdsViewModel @Inject constructor(
     private val cameraIdsRepository: CameraIdsRepository,
 ) : ViewModel() {
-    private val data: Flow<List<CameraResource>> = cameraIdsRepository.cameraIdsStream.map {
+    private val data: Flow<List<CameraIdResource>> = cameraIdsRepository.cameraIdsStream.map {
         it.map { camera ->
-            CameraResource(
+            CameraIdResource(
                 id = camera.cameraId,
                 type = CameraType.from(camera.type.ordinal)!!,
             )

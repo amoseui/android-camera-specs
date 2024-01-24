@@ -27,7 +27,7 @@ enum class CameraType(val value: Int) {
     }
 }
 
-data class CameraResource(
+data class CameraIdResource(
     val id: String,
     val type: CameraType,
 )

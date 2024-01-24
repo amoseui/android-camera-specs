@@ -16,10 +16,23 @@
 
 package com.amoseui.cameraspecs
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SuggestionChip
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
@@ -37,7 +50,7 @@ fun CameraIdsScreen(
 }
 
 @Composable
-fun CameraIdsScreen(
+private fun CameraIdsScreen(
     uiState: CameraIdsUiState,
     innerPadding: PaddingValues,
 ) {
@@ -46,10 +59,44 @@ fun CameraIdsScreen(
             Text(text = "Loading...")
         }
         is CameraIdsUiState.Success -> {
-            CameraIds(
-                cameraResources = uiState.cameraResources,
-                innerPadding = innerPadding,
-            )
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(2),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                modifier = Modifier.padding(innerPadding),
+            ) {
+                items(uiState.cameraIdResources) { cameraResource ->
+                    CameraIdCard(
+                        cameraIdResource = cameraResource,
+                    )
+                }
+            }
         }
+    }
+}
+
+@Composable
+private fun CameraIdCard(
+    cameraIdResource: CameraIdResource,
+) {
+    Card(
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant,
+        ),
+        modifier = Modifier
+            .size(width = 200.dp, height = 100.dp),
+    ) {
+        Text(
+            text = "Camera ID ${cameraIdResource.id}",
+            modifier = Modifier
+                .padding(16.dp),
+            textAlign = TextAlign.Center,
+        )
+        SuggestionChip(
+            modifier = Modifier
+                .padding(start = 16.dp, bottom = 16.dp),
+            label = { Text(cameraIdResource.type.name.lowercase().replaceFirstChar(Char::uppercase)) },
+            onClick = { },
+        )
     }
 }
