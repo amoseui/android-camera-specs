@@ -5,6 +5,7 @@ detekt = "1.18.1"
 spotless = "6.23.3"
 protobuf = "0.9.4"
 hilt = "2.50"
+jacoco-aggregation = "2.2.0"
 
 activity = "1.8.2"
 compose-material3 = "1.1.2"
@@ -35,6 +36,8 @@ io-gitlab-arturbosch-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref 
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 protobuf =  { id = "com.google.protobuf", version.ref = "protobuf" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+aggregation-coverage = { id = "io.github.gmazzo.test.aggregation.coverage", version.ref = "jacoco-aggregation" }
+aggregation-results = { id = "io.github.gmazzo.test.aggregation.results", version.ref = "jacoco-aggregation" }
 
 [libraries]
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity" }

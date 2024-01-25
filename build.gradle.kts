@@ -25,6 +25,8 @@ plugins {
     alias(libs.plugins.spotless)
     alias(libs.plugins.io.gitlab.arturbosch.detekt)
     jacoco
+//    alias(libs.plugins.aggregation.coverage)
+//    alias(libs.plugins.aggregation.results)
 }
 
 subprojects {
@@ -68,45 +70,44 @@ subprojects {
             endWithNewline()
         }
     }
-
-
-    tasks.register<JacocoReport>(name = "jacocoTestCoverageReport") {
-        dependsOn("testDebugUnitTest")
-
-        reports {
-            xml.required.set(true)
-            html.required.set(true)
-        }
-
-        sourceDirectories.setFrom(files("${project.projectDir}/src/main/java", "${project.buildDir}/generated/source/proto/debug/java"))
-
-        val fileFilter =
-            listOf(
-                "**/R.class",
-                "**/R$*.class",
-                "**/BuildConfig.*",
-                "**/Manifest*.*",
-                "**/*Test*.*",
-                "android/**/*.*",
-                "**/*Hilt*",
-                "**/hilt/**",
-            )
-
-        classDirectories.setFrom(
-            fileTree("${project.buildDir}/intermediates/classes/debug/transformDebugClassesWithAsm/dirs/com/amoseui/cameraspecs") {
-                exclude(fileFilter)
-            },
-        )
-
-        executionData.setFrom(
-            fileTree(project.buildDir) {
-                include(
-                    "jacoco/testDebugUnitTest.exec",
-                )
-            },
-        )
-    }
 }
+
+//tasks.register<JacocoReport>(name = "jacocoTestCoverageReport") {
+//    dependsOn("testDebugUnitTest")
+//
+//    reports {
+//        xml.required.set(true)
+//        html.required.set(true)
+//    }
+//
+//    sourceDirectories.setFrom(files("${project.projectDir}/src/main/java", "${project.buildDir}/generated/source/proto/debug/java"))
+//
+//    val fileFilter =
+//        listOf(
+//            "**/R.class",
+//            "**/R$*.class",
+//            "**/BuildConfig.*",
+//            "**/Manifest*.*",
+//            "**/*Test*.*",
+//            "android/**/*.*",
+//            "**/*Hilt*",
+//            "**/hilt/**",
+//        )
+//
+//    classDirectories.setFrom(
+//        fileTree("${project.buildDir}/intermediates/classes/debug/transformDebugClassesWithAsm/dirs/com/amoseui/cameraspecs") {
+//            exclude(fileFilter)
+//        },
+//    )
+//
+//    executionData.setFrom(
+//        fileTree(project.buildDir) {
+//            include(
+//                "jacoco/testDebugUnitTest.exec",
+//            )
+//        },
+//    )
+//}
 
 detekt {
     toolVersion = "1.18.1"
@@ -119,5 +120,23 @@ detekt {
         }
     }
 }
+
+jacoco {
+    toolVersion = "0.8.7"
+}
+
+//testAggregation {
+////    modules {
+////        include(projects.demoProject.app, projects.demoProject.domain, projects.demoProject.login)
+////        exclude(rootProject)
+////    }
+//    coverage {
+//        exclude("**/*Hilt*", "**/hilt/**")
+//    }
+//}
+
+//tasks.check {
+//    dependsOn(tasks.jacocoAggregatedCoverageVerification)
+//}
 
 true // Needed to make the Suppress annotation work for the plugins block
