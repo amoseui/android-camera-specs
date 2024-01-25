@@ -35,10 +35,6 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalView
 import dagger.hilt.android.AndroidEntryPoint
 
-fun add(a: Int, b: Int): Int {
-    return a + b
-}
-
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
