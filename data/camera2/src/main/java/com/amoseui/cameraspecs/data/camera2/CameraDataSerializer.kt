@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.amoseui.cameraspecs
+package com.amoseui.cameraspecs.data.camera2
 
 import androidx.datastore.core.CorruptionException
 import androidx.datastore.core.Serializer
@@ -23,6 +23,7 @@ import java.io.InputStream
 import java.io.OutputStream
 
 object CameraDataSerializer : Serializer<CameraData> {
+
     override val defaultValue: CameraData = CameraData.getDefaultInstance()
 
     override suspend fun readFrom(input: InputStream): CameraData {

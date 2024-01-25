@@ -16,26 +16,23 @@
 
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
-    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
-    alias(libs.plugins.protobuf)
     kotlin("kapt")
     alias(libs.plugins.hilt)
+    alias(libs.plugins.protobuf)
     jacoco
 }
 
 android {
-    namespace = "com.amoseui.cameraspecs"
+    namespace = "com.amoseui.cameraspecs.data.camera2"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.amoseui.cameraspecs"
         minSdk = 21
-        targetSdk = 34
-        versionCode = 10
-        versionName = "0.1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -46,27 +43,11 @@ android {
                 "proguard-rules.pro",
             )
         }
-        debug {
-        }
-    }
-
-    buildFeatures {
-        compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.8"
     }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
-    }
-
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
     }
 
     testOptions {
@@ -78,26 +59,17 @@ android {
 }
 
 dependencies {
-    api(projects.data.camera2)
-
-    implementation(libs.activity.compose)
-    implementation(libs.compose.material3)
-    implementation(libs.compose.ui.tooling.preview)
-    implementation(libs.hilt.navigation.compose)
-    implementation(libs.lifecycle.runtime.compose)
-    implementation(libs.lifecycle.viewmodel.compose)
-    implementation(libs.material3)
-
-    implementation(libs.protobuf.javalite)
+    implementation(libs.datastore)
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
-
-    implementation(libs.timber)
+    implementation(libs.protobuf.javalite)
 
     testImplementation(libs.junit)
-
-    androidTestImplementation(libs.androidx.test.ext.junit)
-    androidTestImplementation(libs.espresso.core)
+    testImplementation(libs.kotlin.coroutines.test)
+    testImplementation(libs.test.core)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.hilt.android.testing)
+    kaptTest(libs.hilt.android.compiler)
 }
 
 kapt {

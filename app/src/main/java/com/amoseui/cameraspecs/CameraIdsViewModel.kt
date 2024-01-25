@@ -18,6 +18,7 @@ package com.amoseui.cameraspecs
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.amoseui.cameraspecs.data.camera2.CameraIdsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted

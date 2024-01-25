@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.amoseui.cameraspecs
+package com.amoseui.cameraspecs.data.camera2
 
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
