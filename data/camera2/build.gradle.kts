@@ -21,6 +21,7 @@ plugins {
     kotlin("kapt")
     alias(libs.plugins.hilt)
     alias(libs.plugins.protobuf)
+    jacoco
 }
 
 android {
@@ -88,4 +89,48 @@ protobuf {
             }
         }
     }
+}
+
+tasks.withType<Test>().configureEach {
+    extensions.configure<JacocoTaskExtension> {
+        isIncludeNoLocationClasses = true
+        excludes = listOf("jdk.internal.*")
+    }
+}
+
+tasks.register<JacocoReport>(name = "jacocoTestCoverageReport") {
+    dependsOn("testDebugUnitTest")
+
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+    }
+
+    sourceDirectories.setFrom(files("${project.projectDir}/src/main/java", "${project.buildDir}/generated/source/proto/debug/java"))
+
+    val fileFilter =
+        listOf(
+            "**/R.class",
+            "**/R$*.class",
+            "**/BuildConfig.*",
+            "**/Manifest*.*",
+            "**/*Test*.*",
+            "android/**/*.*",
+            "**/*Hilt*",
+            "**/hilt/**",
+        )
+
+    classDirectories.setFrom(
+        fileTree("${project.buildDir}/intermediates/classes/debug/transformDebugClassesWithAsm/dirs/com/amoseui/cameraspecs") {
+            exclude(fileFilter)
+        },
+    )
+
+    executionData.setFrom(
+        fileTree(project.buildDir) {
+            include(
+                "jacoco/testDebugUnitTest.exec",
+            )
+        },
+    )
 }
