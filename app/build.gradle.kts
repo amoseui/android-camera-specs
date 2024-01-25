@@ -21,7 +21,6 @@ plugins {
     alias(libs.plugins.protobuf)
     kotlin("kapt")
     alias(libs.plugins.hilt)
-    // jacoco
 }
 
 android {
@@ -47,7 +46,6 @@ android {
             )
         }
         debug {
-            enableUnitTestCoverage = true
         }
     }
 

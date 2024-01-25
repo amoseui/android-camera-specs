@@ -21,7 +21,6 @@ plugins {
     kotlin("kapt")
     alias(libs.plugins.hilt)
     alias(libs.plugins.protobuf)
-    // jacoco
 }
 
 android {
@@ -42,9 +41,6 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
             )
-        }
-        debug {
-            enableUnitTestCoverage = true
         }
     }
 
