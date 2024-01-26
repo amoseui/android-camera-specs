@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.amoseui.cameraspecs
+package com.amoseui.cameraspecs.feature.cameraid
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

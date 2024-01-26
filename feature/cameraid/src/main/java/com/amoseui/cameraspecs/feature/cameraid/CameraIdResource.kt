@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.amoseui.cameraspecs
+package com.amoseui.cameraspecs.feature.cameraid
 
 enum class CameraType(val value: Int) {
     NORMAL(0),
