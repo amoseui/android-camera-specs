@@ -61,16 +61,12 @@ class CameraIdsSystemDataSource @Inject constructor(
         val cameraManager = context.getSystemService(Context.CAMERA_SERVICE) as CameraManager
         cameraManager.cameraIdList.forEach {
             val cameraCharacteristics = cameraManager.getCameraCharacteristics(it)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                if (cameraCharacteristics.get(CameraCharacteristics.REQUEST_AVAILABLE_CAPABILITIES)
-                        ?.contains(CameraMetadata.REQUEST_AVAILABLE_CAPABILITIES_LOGICAL_MULTI_CAMERA) == true
-                ) {
-                    list.add(it to CameraData.Type.TYPE_LOGICAL)
-                    cameraCharacteristics.physicalCameraIds.forEach { physicalCameraId ->
-                        list.add(physicalCameraId to CameraData.Type.TYPE_PHYSICAL)
-                    }
-                } else {
-                    list.add(it to CameraData.Type.TYPE_NORMAL)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P && cameraCharacteristics.get(CameraCharacteristics.REQUEST_AVAILABLE_CAPABILITIES)
+                    ?.contains(CameraMetadata.REQUEST_AVAILABLE_CAPABILITIES_LOGICAL_MULTI_CAMERA) == true
+            ) {
+                list.add(it to CameraData.Type.TYPE_LOGICAL)
+                cameraCharacteristics.physicalCameraIds.forEach { physicalCameraId ->
+                    list.add(physicalCameraId to CameraData.Type.TYPE_PHYSICAL)
                 }
             } else {
                 list.add(it to CameraData.Type.TYPE_NORMAL)
