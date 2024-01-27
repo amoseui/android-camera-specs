@@ -52,4 +52,21 @@ class CameraIdsRepositoryTest {
         assertEquals("0", repository.cameraIdsStream.first()[0].cameraId)
         assertEquals(CameraData.Type.TYPE_NORMAL, repository.cameraIdsStream.first()[0].type)
     }
+
+    @Test
+    @Config(maxSdk = Build.VERSION_CODES.O_MR1)
+    fun refreshCameraIdsTest_maxSdk_OMR1() = runTest {
+        val cameraManager = ApplicationProvider.getApplicationContext<Application>().getSystemService(Context.CAMERA_SERVICE) as CameraManager
+        shadowOf(cameraManager).addCamera("0", ShadowCameraCharacteristics.newCameraCharacteristics())
+
+        val repository = CameraIdsRepository(
+            CameraIdsSystemDataSource(
+                ApplicationProvider.getApplicationContext(),
+            ),
+        )
+        repository.refreshCameraIds()
+
+        assertEquals("0", repository.cameraIdsStream.first()[0].cameraId)
+        assertEquals(CameraData.Type.TYPE_NORMAL, repository.cameraIdsStream.first()[0].type)
+    }
 }
