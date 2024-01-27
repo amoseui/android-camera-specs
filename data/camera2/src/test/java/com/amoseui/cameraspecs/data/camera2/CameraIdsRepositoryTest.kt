@@ -21,6 +21,7 @@ import android.content.Context
 import android.hardware.camera2.CameraManager
 import android.os.Build
 import androidx.test.core.app.ApplicationProvider
+import com.amoseui.cameraspecs.testing.shadows.ShadowCameraExtensionCharacteristics
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
@@ -33,7 +34,7 @@ import org.robolectric.annotation.Config
 import org.robolectric.shadows.ShadowCameraCharacteristics
 
 @HiltAndroidTest
-@Config(sdk = [Build.VERSION_CODES.TIRAMISU])
+@Config(sdk = [Build.VERSION_CODES.TIRAMISU], shadows = [ShadowCameraExtensionCharacteristics::class])
 @RunWith(RobolectricTestRunner::class)
 class CameraIdsRepositoryTest {
 

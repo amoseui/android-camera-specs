@@ -37,6 +37,14 @@ subprojects {
 
     apply(plugin = rootProject.libs.plugins.spotless.get().pluginId)
     configure<com.diffplug.gradle.spotless.SpotlessExtension> {
+        java {
+            target("**/*.java")
+            targetExclude("$buildDir/**/*.java")
+            googleJavaFormat()
+            licenseHeaderFile(rootProject.file("spotless/spotless.license.kt"))
+            trimTrailingWhitespace()
+            endWithNewline()
+        }
         kotlin {
             target("**/*.kt")
             targetExclude("$buildDir/**/*.kt")

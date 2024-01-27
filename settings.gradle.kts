@@ -19,3 +19,4 @@ rootProject.name = "CameraSpecs"
 include(":app")
 include(":data:camera2")
 include(":feature:cameraid")
+include(":testing")
