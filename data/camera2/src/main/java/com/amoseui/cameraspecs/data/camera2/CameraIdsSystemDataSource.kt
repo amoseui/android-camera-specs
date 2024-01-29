@@ -21,6 +21,7 @@ import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraManager
 import android.hardware.camera2.CameraMetadata
 import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.datastore.core.DataStore
 import androidx.datastore.dataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -49,6 +50,15 @@ class CameraIdsSystemDataSource @Inject constructor(
                         CameraData.Camera.newBuilder()
                             .setCameraId(camera.first)
                             .setType(camera.second)
+                            .addAllExtensions(
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S &&
+                                    camera.second == CameraData.Type.TYPE_LOGICAL
+                                ) {
+                                    getSupportedExtensions(camera.first)
+                                } else {
+                                    listOf()
+                                },
+                            )
                             .build()
                     },
                 )
@@ -73,5 +83,12 @@ class CameraIdsSystemDataSource @Inject constructor(
             }
         }
         return list
+    }
+
+    @RequiresApi(Build.VERSION_CODES.S)
+    private fun getSupportedExtensions(cameraId: String): List<Int> {
+        val cameraManager = context.getSystemService(Context.CAMERA_SERVICE) as CameraManager
+        val cameraExtensionCharacteristics = cameraManager.getCameraExtensionCharacteristics(cameraId)
+        return cameraExtensionCharacteristics.supportedExtensions
     }
 }
