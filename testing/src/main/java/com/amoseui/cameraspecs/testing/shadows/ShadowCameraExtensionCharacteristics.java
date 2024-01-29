@@ -18,6 +18,7 @@ package com.amoseui.cameraspecs.testing.shadows;
 
 import android.hardware.camera2.CameraExtensionCharacteristics;
 import android.os.Build.VERSION_CODES;
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,8 +35,12 @@ public class ShadowCameraExtensionCharacteristics {
     return ReflectionHelpers.callConstructor(CameraExtensionCharacteristics.class);
   }
 
+  @RequiresApi(api = VERSION_CODES.S)
   @Implementation
-  public List<Integer> getSupportedResolutions() {
-    return new ArrayList<>();
+  public @NonNull List<Integer> getSupportedExtensions() {
+    List<Integer> supportedExtensions = new ArrayList<>();
+    supportedExtensions.add(CameraExtensionCharacteristics.EXTENSION_AUTOMATIC);
+    supportedExtensions.add(CameraExtensionCharacteristics.EXTENSION_HDR);
+    return supportedExtensions;
   }
 }

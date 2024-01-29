@@ -48,4 +48,5 @@ android {
 
 dependencies {
     implementation(libs.robolectric)
+    implementation(libs.androidx.annotation.jvm)
 }
