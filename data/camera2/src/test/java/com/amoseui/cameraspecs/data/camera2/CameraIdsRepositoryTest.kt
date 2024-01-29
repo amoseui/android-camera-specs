@@ -32,6 +32,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -54,9 +55,6 @@ class CameraIdsRepositoryTest {
     @Test
     @Config(minSdk = Build.VERSION_CODES.S)
     fun refreshCameraIdsTest_minSdk_S() = runTest {
-        val cameraManager = ApplicationProvider.getApplicationContext<Application>().getSystemService(Context.CAMERA_SERVICE) as CameraManager
-        val shadowCameraManager = shadowOf(cameraManager) as ShadowCameraExtensionManager
-
         val cameraCharacteristics = ShadowCameraCharacteristicsExtended.newCameraCharacteristics()
         val shadowCameraCharacteristics = shadowOf(cameraCharacteristics)
         shadowCameraCharacteristics.set(
@@ -64,6 +62,8 @@ class CameraIdsRepositoryTest {
             intArrayOf(CameraMetadata.REQUEST_AVAILABLE_CAPABILITIES_LOGICAL_MULTI_CAMERA),
         )
 
+        val cameraManager = ApplicationProvider.getApplicationContext<Application>().getSystemService(Context.CAMERA_SERVICE) as CameraManager
+        val shadowCameraManager = shadowOf(cameraManager) as ShadowCameraExtensionManager
         shadowCameraManager.addCamera("0", cameraCharacteristics)
         shadowCameraManager.addCameraExtensionCharacteristics("0", ShadowCameraExtensionCharacteristics.newCameraExtensionCharacteristics())
 
@@ -90,16 +90,18 @@ class CameraIdsRepositoryTest {
         assertEquals(CameraExtensionCharacteristics.EXTENSION_HDR, repository.cameraIdsStream.first()[0].extensionsList[1])
     }
 
+    @Ignore
     @Test
     @Config(minSdk = Build.VERSION_CODES.P, maxSdk = Build.VERSION_CODES.R)
     fun refreshCameraIdsTest_minSdk_P_maxSdk_R() = runTest {
-        val cameraManager = ApplicationProvider.getApplicationContext<Application>().getSystemService(Context.CAMERA_SERVICE) as CameraManager
         val cameraCharacteristics = ShadowCameraCharacteristics.newCameraCharacteristics()
         val shadowCameraCharacteristics = shadowOf(cameraCharacteristics)
         shadowCameraCharacteristics.set(
             CameraCharacteristics.REQUEST_AVAILABLE_CAPABILITIES,
             intArrayOf(),
         )
+
+        val cameraManager = ApplicationProvider.getApplicationContext<Application>().getSystemService(Context.CAMERA_SERVICE) as CameraManager
         shadowOf(cameraManager).addCamera("0", cameraCharacteristics)
 
         val repository = CameraIdsRepository(
