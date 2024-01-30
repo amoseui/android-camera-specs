@@ -67,6 +67,13 @@ class CameraIdsRepositoryTest {
         shadowCameraManager.addCamera("0", cameraCharacteristics)
         shadowCameraManager.addCameraExtensionCharacteristics("0", ShadowCameraExtensionCharacteristics.newCameraExtensionCharacteristics())
 
+        shadowCameraManager.addCamera("2", cameraCharacteristics)
+        shadowCameraManager.addCameraExtensionCharacteristics("2", ShadowCameraExtensionCharacteristics.newCameraExtensionCharacteristics())
+        shadowCameraManager.addCamera("5", cameraCharacteristics)
+        shadowCameraManager.addCameraExtensionCharacteristics("5", ShadowCameraExtensionCharacteristics.newCameraExtensionCharacteristics())
+        shadowCameraManager.addCamera("6", cameraCharacteristics)
+        shadowCameraManager.addCameraExtensionCharacteristics("6", ShadowCameraExtensionCharacteristics.newCameraExtensionCharacteristics())
+
         val repository = CameraIdsRepository(
             CameraIdsSystemDataSource(
                 ApplicationProvider.getApplicationContext(),
@@ -88,6 +95,12 @@ class CameraIdsRepositoryTest {
 
         assertEquals(CameraExtensionCharacteristics.EXTENSION_AUTOMATIC, repository.cameraIdsStream.first()[0].extensionsList[0])
         assertEquals(CameraExtensionCharacteristics.EXTENSION_HDR, repository.cameraIdsStream.first()[0].extensionsList[1])
+        assertEquals(CameraExtensionCharacteristics.EXTENSION_AUTOMATIC, repository.cameraIdsStream.first()[1].extensionsList[0])
+        assertEquals(CameraExtensionCharacteristics.EXTENSION_HDR, repository.cameraIdsStream.first()[1].extensionsList[1])
+        assertEquals(CameraExtensionCharacteristics.EXTENSION_AUTOMATIC, repository.cameraIdsStream.first()[2].extensionsList[0])
+        assertEquals(CameraExtensionCharacteristics.EXTENSION_HDR, repository.cameraIdsStream.first()[2].extensionsList[1])
+        assertEquals(CameraExtensionCharacteristics.EXTENSION_AUTOMATIC, repository.cameraIdsStream.first()[3].extensionsList[0])
+        assertEquals(CameraExtensionCharacteristics.EXTENSION_HDR, repository.cameraIdsStream.first()[3].extensionsList[1])
     }
 
     @Ignore

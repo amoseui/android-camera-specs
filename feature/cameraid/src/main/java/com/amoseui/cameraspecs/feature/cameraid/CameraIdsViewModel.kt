@@ -42,6 +42,9 @@ class CameraIdsViewModel @Inject constructor(
             CameraIdResource(
                 id = camera.cameraId,
                 type = CameraType.from(camera.type.ordinal)!!,
+                extensions = camera.extensionsList.map { extension ->
+                    ExtensionType.from(extension)!!
+                },
             )
         }
     }
@@ -53,6 +56,7 @@ class CameraIdsViewModel @Inject constructor(
         initialValue = CameraIdsUiState.Loading,
         started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5_000),
     )
+
     fun getCameraIds() {
         viewModelScope.launch {
             cameraIdsRepository.refreshCameraIds()
