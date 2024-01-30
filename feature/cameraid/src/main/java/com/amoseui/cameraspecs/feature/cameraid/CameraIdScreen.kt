@@ -39,28 +39,28 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
-fun CameraIdsScreen(
-    cameraIdsViewModel: CameraIdsViewModel = hiltViewModel(),
+fun CameraIdScreen(
+    cameraIdViewModel: CameraIdViewModel = hiltViewModel(),
     innerPadding: PaddingValues,
 ) {
-    cameraIdsViewModel.getCameraIds()
-    val uiState by cameraIdsViewModel.uiState.collectAsStateWithLifecycle()
-    CameraIdsScreen(
+    cameraIdViewModel.getCameraIds()
+    val uiState by cameraIdViewModel.uiState.collectAsStateWithLifecycle()
+    CameraIdScreen(
         uiState = uiState,
         innerPadding = innerPadding,
     )
 }
 
 @Composable
-private fun CameraIdsScreen(
-    uiState: CameraIdsUiState,
+private fun CameraIdScreen(
+    uiState: CameraIdUiState,
     innerPadding: PaddingValues,
 ) {
     when (uiState) {
-        is CameraIdsUiState.Loading -> {
+        is CameraIdUiState.Loading -> {
             Text(text = "Loading...")
         }
-        is CameraIdsUiState.Success -> {
+        is CameraIdUiState.Success -> {
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
                 verticalArrangement = Arrangement.spacedBy(16.dp),

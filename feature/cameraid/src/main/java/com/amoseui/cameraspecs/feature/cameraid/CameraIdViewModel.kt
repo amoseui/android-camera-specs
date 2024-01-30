@@ -18,7 +18,7 @@ package com.amoseui.cameraspecs.feature.cameraid
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.amoseui.cameraspecs.data.camera2.CameraIdsRepository
+import com.amoseui.cameraspecs.data.camera2.CameraIdRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
@@ -28,16 +28,16 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-sealed interface CameraIdsUiState {
-    data object Loading : CameraIdsUiState
-    data class Success(val cameraIdResources: List<CameraIdResource>) : CameraIdsUiState
+sealed interface CameraIdUiState {
+    data object Loading : CameraIdUiState
+    data class Success(val cameraIdResources: List<CameraIdResource>) : CameraIdUiState
 }
 
 @HiltViewModel
-class CameraIdsViewModel @Inject constructor(
-    private val cameraIdsRepository: CameraIdsRepository,
+class CameraIdViewModel @Inject constructor(
+    private val cameraIdRepository: CameraIdRepository,
 ) : ViewModel() {
-    private val data: Flow<List<CameraIdResource>> = cameraIdsRepository.cameraIdsStream.map {
+    private val data: Flow<List<CameraIdResource>> = cameraIdRepository.cameraIdStream.map {
         it.map { camera ->
             CameraIdResource(
                 id = camera.cameraId,
@@ -49,17 +49,17 @@ class CameraIdsViewModel @Inject constructor(
         }
     }
 
-    val uiState: StateFlow<CameraIdsUiState> = data.map {
-        CameraIdsUiState.Success(it)
+    val uiState: StateFlow<CameraIdUiState> = data.map {
+        CameraIdUiState.Success(it)
     }.stateIn(
         scope = viewModelScope,
-        initialValue = CameraIdsUiState.Loading,
+        initialValue = CameraIdUiState.Loading,
         started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5_000),
     )
 
     fun getCameraIds() {
         viewModelScope.launch {
-            cameraIdsRepository.refreshCameraIds()
+            cameraIdRepository.refreshCameraIds()
         }
     }
 }
