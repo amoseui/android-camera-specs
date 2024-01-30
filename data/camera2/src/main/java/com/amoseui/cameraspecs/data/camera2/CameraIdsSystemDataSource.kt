@@ -51,9 +51,7 @@ class CameraIdsSystemDataSource @Inject constructor(
                             .setCameraId(camera.first)
                             .setType(camera.second)
                             .addAllExtensions(
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S &&
-                                    camera.second == CameraData.Type.TYPE_LOGICAL
-                                ) {
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                                     getSupportedExtensions(camera.first)
                                 } else {
                                     listOf()
