@@ -14,6 +14,7 @@ message CameraData {
     string cameraId = 1;
     Type type = 2;
     repeated int32 extensions = 3;
+    bool camera1Legacy = 4;
   }
 
   repeated Camera cameras = 1;

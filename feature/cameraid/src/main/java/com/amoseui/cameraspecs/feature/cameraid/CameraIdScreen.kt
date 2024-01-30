@@ -94,6 +94,12 @@ private fun CameraIdCard(
                 .padding(8.dp),
             textAlign = TextAlign.Center,
         )
+        Text(
+            text = "Camera1: ${cameraIdResource.camera1Legacy}",
+            modifier = Modifier
+                .padding(8.dp),
+            textAlign = TextAlign.Center,
+        )
         SuggestionChip(
             modifier = Modifier
                 .padding(start = 4.dp, bottom = 4.dp),

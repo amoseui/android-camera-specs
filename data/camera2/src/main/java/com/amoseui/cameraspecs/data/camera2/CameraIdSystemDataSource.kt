@@ -17,6 +17,7 @@
 package com.amoseui.cameraspecs.data.camera2
 
 import android.content.Context
+import android.hardware.Camera
 import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraManager
 import android.hardware.camera2.CameraMetadata
@@ -42,6 +43,7 @@ class CameraIdSystemDataSource @Inject constructor(
     }
 
     suspend fun refreshCameraIds() {
+        val numberOfCamera = Camera.getNumberOfCameras()
         context.cameraDataStore.updateData {
             it.toBuilder()
                 .clearCameras()
@@ -57,6 +59,7 @@ class CameraIdSystemDataSource @Inject constructor(
                                     listOf()
                                 },
                             )
+                            .setCamera1Legacy(camera.first.toInt() < numberOfCamera)
                             .build()
                     },
                 )

@@ -18,6 +18,7 @@ package com.amoseui.cameraspecs.data.camera2
 
 import android.app.Application
 import android.content.Context
+import android.hardware.Camera
 import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraExtensionCharacteristics
 import android.hardware.camera2.CameraManager
@@ -31,6 +32,7 @@ import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Ignore
 import org.junit.Test
@@ -38,12 +40,14 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
+import org.robolectric.shadows.ShadowCamera
 import org.robolectric.shadows.ShadowCameraCharacteristics
 
 @HiltAndroidTest
 @Config(
     sdk = [Build.VERSION_CODES.TIRAMISU],
     shadows = [
+        ShadowCamera::class,
         ShadowCameraCharacteristicsExtended::class,
         ShadowCameraExtensionCharacteristics::class,
         ShadowCameraExtensionManager::class,
@@ -55,6 +59,8 @@ class CameraIdRepositoryTest {
     @Test
     @Config(minSdk = Build.VERSION_CODES.S)
     fun refreshCameraIdsTest_minSdk_S() = runTest {
+        ShadowCamera.addCameraInfo(0, Camera.CameraInfo())
+
         val cameraCharacteristics = ShadowCameraCharacteristicsExtended.newCameraCharacteristics()
         val shadowCameraCharacteristics = shadowOf(cameraCharacteristics)
         shadowCameraCharacteristics.set(
@@ -83,24 +89,27 @@ class CameraIdRepositoryTest {
 
         assertEquals("0", repository.cameraIdStream.first()[0].cameraId)
         assertEquals(CameraData.Type.TYPE_LOGICAL, repository.cameraIdStream.first()[0].type)
+        assertEquals(CameraExtensionCharacteristics.EXTENSION_AUTOMATIC, repository.cameraIdStream.first()[0].extensionsList[0])
+        assertEquals(CameraExtensionCharacteristics.EXTENSION_HDR, repository.cameraIdStream.first()[0].extensionsList[1])
+        assertTrue(repository.cameraIdStream.first()[0].camera1Legacy)
 
         assertEquals("2", repository.cameraIdStream.first()[1].cameraId)
         assertEquals(CameraData.Type.TYPE_PHYSICAL, repository.cameraIdStream.first()[1].type)
+        assertEquals(CameraExtensionCharacteristics.EXTENSION_AUTOMATIC, repository.cameraIdStream.first()[1].extensionsList[0])
+        assertEquals(CameraExtensionCharacteristics.EXTENSION_HDR, repository.cameraIdStream.first()[1].extensionsList[1])
+        assertFalse(repository.cameraIdStream.first()[1].camera1Legacy)
 
         assertEquals("5", repository.cameraIdStream.first()[2].cameraId)
         assertEquals(CameraData.Type.TYPE_PHYSICAL, repository.cameraIdStream.first()[2].type)
+        assertEquals(CameraExtensionCharacteristics.EXTENSION_AUTOMATIC, repository.cameraIdStream.first()[2].extensionsList[0])
+        assertEquals(CameraExtensionCharacteristics.EXTENSION_HDR, repository.cameraIdStream.first()[2].extensionsList[1])
+        assertFalse(repository.cameraIdStream.first()[2].camera1Legacy)
 
         assertEquals("6", repository.cameraIdStream.first()[3].cameraId)
         assertEquals(CameraData.Type.TYPE_PHYSICAL, repository.cameraIdStream.first()[3].type)
-
-        assertEquals(CameraExtensionCharacteristics.EXTENSION_AUTOMATIC, repository.cameraIdStream.first()[0].extensionsList[0])
-        assertEquals(CameraExtensionCharacteristics.EXTENSION_HDR, repository.cameraIdStream.first()[0].extensionsList[1])
-        assertEquals(CameraExtensionCharacteristics.EXTENSION_AUTOMATIC, repository.cameraIdStream.first()[1].extensionsList[0])
-        assertEquals(CameraExtensionCharacteristics.EXTENSION_HDR, repository.cameraIdStream.first()[1].extensionsList[1])
-        assertEquals(CameraExtensionCharacteristics.EXTENSION_AUTOMATIC, repository.cameraIdStream.first()[2].extensionsList[0])
-        assertEquals(CameraExtensionCharacteristics.EXTENSION_HDR, repository.cameraIdStream.first()[2].extensionsList[1])
         assertEquals(CameraExtensionCharacteristics.EXTENSION_AUTOMATIC, repository.cameraIdStream.first()[3].extensionsList[0])
         assertEquals(CameraExtensionCharacteristics.EXTENSION_HDR, repository.cameraIdStream.first()[3].extensionsList[1])
+        assertFalse(repository.cameraIdStream.first()[3].camera1Legacy)
     }
 
     @Ignore
