@@ -45,6 +45,7 @@ class CameraIdViewModel @Inject constructor(
                 extensions = camera.extensionsList.map { extension ->
                     ExtensionType.from(extension)!!
                 },
+                camera1Legacy = camera.camera1Legacy,
             )
         }
     }

@@ -44,4 +44,5 @@ data class CameraIdResource(
     val id: String,
     val type: CameraType,
     val extensions: List<ExtensionType>,
+    val camera1Legacy: Boolean,
 )
