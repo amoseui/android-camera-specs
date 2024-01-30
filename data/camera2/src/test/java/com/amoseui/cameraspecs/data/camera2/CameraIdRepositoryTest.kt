@@ -50,7 +50,7 @@ import org.robolectric.shadows.ShadowCameraCharacteristics
     ],
 )
 @RunWith(RobolectricTestRunner::class)
-class CameraIdsRepositoryTest {
+class CameraIdRepositoryTest {
 
     @Test
     @Config(minSdk = Build.VERSION_CODES.S)
@@ -74,33 +74,33 @@ class CameraIdsRepositoryTest {
         shadowCameraManager.addCamera("6", cameraCharacteristics)
         shadowCameraManager.addCameraExtensionCharacteristics("6", ShadowCameraExtensionCharacteristics.newCameraExtensionCharacteristics())
 
-        val repository = CameraIdsRepository(
-            CameraIdsSystemDataSource(
+        val repository = CameraIdRepository(
+            CameraIdSystemDataSource(
                 ApplicationProvider.getApplicationContext(),
             ),
         )
         repository.refreshCameraIds()
 
-        assertEquals("0", repository.cameraIdsStream.first()[0].cameraId)
-        assertEquals(CameraData.Type.TYPE_LOGICAL, repository.cameraIdsStream.first()[0].type)
+        assertEquals("0", repository.cameraIdStream.first()[0].cameraId)
+        assertEquals(CameraData.Type.TYPE_LOGICAL, repository.cameraIdStream.first()[0].type)
 
-        assertEquals("2", repository.cameraIdsStream.first()[1].cameraId)
-        assertEquals(CameraData.Type.TYPE_PHYSICAL, repository.cameraIdsStream.first()[1].type)
+        assertEquals("2", repository.cameraIdStream.first()[1].cameraId)
+        assertEquals(CameraData.Type.TYPE_PHYSICAL, repository.cameraIdStream.first()[1].type)
 
-        assertEquals("5", repository.cameraIdsStream.first()[2].cameraId)
-        assertEquals(CameraData.Type.TYPE_PHYSICAL, repository.cameraIdsStream.first()[2].type)
+        assertEquals("5", repository.cameraIdStream.first()[2].cameraId)
+        assertEquals(CameraData.Type.TYPE_PHYSICAL, repository.cameraIdStream.first()[2].type)
 
-        assertEquals("6", repository.cameraIdsStream.first()[3].cameraId)
-        assertEquals(CameraData.Type.TYPE_PHYSICAL, repository.cameraIdsStream.first()[3].type)
+        assertEquals("6", repository.cameraIdStream.first()[3].cameraId)
+        assertEquals(CameraData.Type.TYPE_PHYSICAL, repository.cameraIdStream.first()[3].type)
 
-        assertEquals(CameraExtensionCharacteristics.EXTENSION_AUTOMATIC, repository.cameraIdsStream.first()[0].extensionsList[0])
-        assertEquals(CameraExtensionCharacteristics.EXTENSION_HDR, repository.cameraIdsStream.first()[0].extensionsList[1])
-        assertEquals(CameraExtensionCharacteristics.EXTENSION_AUTOMATIC, repository.cameraIdsStream.first()[1].extensionsList[0])
-        assertEquals(CameraExtensionCharacteristics.EXTENSION_HDR, repository.cameraIdsStream.first()[1].extensionsList[1])
-        assertEquals(CameraExtensionCharacteristics.EXTENSION_AUTOMATIC, repository.cameraIdsStream.first()[2].extensionsList[0])
-        assertEquals(CameraExtensionCharacteristics.EXTENSION_HDR, repository.cameraIdsStream.first()[2].extensionsList[1])
-        assertEquals(CameraExtensionCharacteristics.EXTENSION_AUTOMATIC, repository.cameraIdsStream.first()[3].extensionsList[0])
-        assertEquals(CameraExtensionCharacteristics.EXTENSION_HDR, repository.cameraIdsStream.first()[3].extensionsList[1])
+        assertEquals(CameraExtensionCharacteristics.EXTENSION_AUTOMATIC, repository.cameraIdStream.first()[0].extensionsList[0])
+        assertEquals(CameraExtensionCharacteristics.EXTENSION_HDR, repository.cameraIdStream.first()[0].extensionsList[1])
+        assertEquals(CameraExtensionCharacteristics.EXTENSION_AUTOMATIC, repository.cameraIdStream.first()[1].extensionsList[0])
+        assertEquals(CameraExtensionCharacteristics.EXTENSION_HDR, repository.cameraIdStream.first()[1].extensionsList[1])
+        assertEquals(CameraExtensionCharacteristics.EXTENSION_AUTOMATIC, repository.cameraIdStream.first()[2].extensionsList[0])
+        assertEquals(CameraExtensionCharacteristics.EXTENSION_HDR, repository.cameraIdStream.first()[2].extensionsList[1])
+        assertEquals(CameraExtensionCharacteristics.EXTENSION_AUTOMATIC, repository.cameraIdStream.first()[3].extensionsList[0])
+        assertEquals(CameraExtensionCharacteristics.EXTENSION_HDR, repository.cameraIdStream.first()[3].extensionsList[1])
     }
 
     @Ignore
@@ -117,16 +117,16 @@ class CameraIdsRepositoryTest {
         val cameraManager = ApplicationProvider.getApplicationContext<Application>().getSystemService(Context.CAMERA_SERVICE) as CameraManager
         shadowOf(cameraManager).addCamera("0", cameraCharacteristics)
 
-        val repository = CameraIdsRepository(
-            CameraIdsSystemDataSource(
+        val repository = CameraIdRepository(
+            CameraIdSystemDataSource(
                 ApplicationProvider.getApplicationContext(),
             ),
         )
         repository.refreshCameraIds()
 
-        assertEquals("0", repository.cameraIdsStream.first()[0].cameraId)
-        assertEquals(CameraData.Type.TYPE_NORMAL, repository.cameraIdsStream.first()[0].type)
-        assertTrue(repository.cameraIdsStream.first()[0].extensionsList.isEmpty())
+        assertEquals("0", repository.cameraIdStream.first()[0].cameraId)
+        assertEquals(CameraData.Type.TYPE_NORMAL, repository.cameraIdStream.first()[0].type)
+        assertTrue(repository.cameraIdStream.first()[0].extensionsList.isEmpty())
     }
 
     @Test
@@ -135,15 +135,15 @@ class CameraIdsRepositoryTest {
         val cameraManager = ApplicationProvider.getApplicationContext<Application>().getSystemService(Context.CAMERA_SERVICE) as CameraManager
         shadowOf(cameraManager).addCamera("0", ShadowCameraCharacteristics.newCameraCharacteristics())
 
-        val repository = CameraIdsRepository(
-            CameraIdsSystemDataSource(
+        val repository = CameraIdRepository(
+            CameraIdSystemDataSource(
                 ApplicationProvider.getApplicationContext(),
             ),
         )
         repository.refreshCameraIds()
 
-        assertEquals("0", repository.cameraIdsStream.first()[0].cameraId)
-        assertEquals(CameraData.Type.TYPE_NORMAL, repository.cameraIdsStream.first()[0].type)
-        assertTrue(repository.cameraIdsStream.first()[0].extensionsList.isEmpty())
+        assertEquals("0", repository.cameraIdStream.first()[0].cameraId)
+        assertEquals(CameraData.Type.TYPE_NORMAL, repository.cameraIdStream.first()[0].type)
+        assertTrue(repository.cameraIdStream.first()[0].extensionsList.isEmpty())
     }
 }

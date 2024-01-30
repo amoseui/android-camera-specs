@@ -19,9 +19,9 @@ package com.amoseui.cameraspecs.data.camera2
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class CameraIdsRepository @Inject constructor(private val dataSource: CameraIdsSystemDataSource) {
+class CameraIdRepository @Inject constructor(private val dataSource: CameraIdSystemDataSource) {
 
-    val cameraIdsStream: Flow<List<CameraData.Camera>> = dataSource.cameraIdsStream
+    val cameraIdStream: Flow<List<CameraData.Camera>> = dataSource.cameraIdStream
 
     suspend fun refreshCameraIds() = dataSource.refreshCameraIds()
 }

@@ -34,10 +34,10 @@ val Context.cameraDataStore: DataStore<CameraData> by dataStore(
     serializer = CameraDataSerializer,
 )
 
-class CameraIdsSystemDataSource @Inject constructor(
+class CameraIdSystemDataSource @Inject constructor(
     @ApplicationContext private val context: Context,
 ) {
-    val cameraIdsStream: Flow<List<CameraData.Camera>> = context.cameraDataStore.data.map {
+    val cameraIdStream: Flow<List<CameraData.Camera>> = context.cameraDataStore.data.map {
         it.camerasList
     }
 

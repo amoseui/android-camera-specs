@@ -33,7 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalView
-import com.amoseui.cameraspecs.feature.cameraid.CameraIdsScreen
+import com.amoseui.cameraspecs.feature.cameraid.CameraIdScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -89,6 +89,6 @@ fun CameraInfoTopAppBar() {
             )
         },
     ) { innerPadding ->
-        CameraIdsScreen(innerPadding = innerPadding)
+        CameraIdScreen(innerPadding = innerPadding)
     }
 }
