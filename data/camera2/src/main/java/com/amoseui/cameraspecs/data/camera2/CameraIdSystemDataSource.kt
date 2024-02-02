@@ -87,7 +87,7 @@ class CameraIdSystemDataSource @Inject constructor(
     }
 
     @RequiresApi(Build.VERSION_CODES.S)
-    private fun getSupportedExtensions(cameraId: String): List<Int> {
+    fun getSupportedExtensions(cameraId: String): List<Int> {
         val cameraManager = context.getSystemService(Context.CAMERA_SERVICE) as CameraManager
         val cameraExtensionCharacteristics = cameraManager.getCameraExtensionCharacteristics(cameraId)
         return cameraExtensionCharacteristics.supportedExtensions
