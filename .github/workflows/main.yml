@@ -24,12 +24,20 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-gradle-
 
-    - name: Build with gradle
+    - name: echo
       env:
         JAVA_HOME: ${{ env.JAVA_HOME_17_X64 }}
       run: |
+        echo "EUISANG 1"
         echo $JAVA_HOME
-        ./gradlew build jacocoTestCoverageReport detekt
+        echo "EUISANG 2"
+        echo $PATH
+        echo "EUISANG 3"
+
+    - name: Build with gradle
+      env:
+        JAVA_HOME: ${{ env.JAVA_HOME_17_X64 }}
+      run: ./gradlew build jacocoTestCoverageReport detekt
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
