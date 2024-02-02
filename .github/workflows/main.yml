@@ -26,7 +26,7 @@ jobs:
 
     - name: echo
       run: |
-        echo $JAVA_HOME_17_x64
+        echo $JAVA_HOME_17_X64
         echo "JAVA_HOME=$JAVA_HOME_17_X64" >> $GITHUB_ENV
         echo "EUISANG 1"
         echo $JAVA_HOME
