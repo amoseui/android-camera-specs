@@ -12,10 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Cache gradle packages
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: |
           ~/.gradle/caches
@@ -24,26 +24,8 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-gradle-
 
-    - name: echo
-      run: |
-        echo $JAVA_HOME_17_X64
-        echo "JAVA_HOME=$JAVA_HOME_17_X64" >> $GITHUB_ENV
-        echo "EUISANG 1"
-        echo $JAVA_HOME
-        echo "EUISANG 2"
-        echo $PATH
-        echo "EUISANG 3"
-
     - name: Build with gradle
-      env:
-        JAVA_HOME: ${{ env.JAVA_HOME_17_X64 }}
       run: |
-        echo "JAVA_HOME=$JAVA_HOME_17_X64" >> $GITHUB_ENV
-        echo "EUISANG 1"
-        echo $JAVA_HOME
-        echo "EUISANG 2"
-        echo $JAVA_HOME_17_X64
-        echo "EUISANG 3"
         JAVA_HOME=$JAVA_HOME_17_X64 ./gradlew build jacocoTestCoverageReport detekt
 
     - name: Upload coverage to Codecov
