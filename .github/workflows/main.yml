@@ -26,7 +26,7 @@ jobs:
 
     - name: echo
       run: |
-        echo ${{ env.JAVA_HOME_17_X64 }}
+        echo $JAVA_HOME_17_X64
         echo "JAVA_HOME=$JAVA_HOME_17_X64" >> $GITHUB_ENV
         echo "EUISANG 1"
         echo $JAVA_HOME
@@ -42,7 +42,9 @@ jobs:
         echo "EUISANG 1"
         echo $JAVA_HOME
         echo "EUISANG 2"
-        ./gradlew build jacocoTestCoverageReport detekt
+        echo $JAVA_HOME_17_X64
+        echo "EUISANG 3"
+        JAVA_HOME=$JAVA_HOME_17_X64 ./gradlew build jacocoTestCoverageReport detekt
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
