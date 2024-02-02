@@ -20,7 +20,6 @@ plugins {
     alias(libs.plugins.kotlinAndroid)
     kotlin("kapt")
     alias(libs.plugins.hilt)
-    alias(libs.plugins.qodana)
     jacoco
 }
 
