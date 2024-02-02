@@ -26,7 +26,8 @@ jobs:
 
     - name: Build with gradle
       run: |
-        JAVA_HOME=$JAVA_HOME_17_X64 ./gradlew build jacocoTestCoverageReport detekt
+        JAVA_HOME=$JAVA_HOME_17_X64
+        ./gradlew build jacocoTestCoverageReport detekt
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
