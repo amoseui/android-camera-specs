@@ -21,6 +21,7 @@ plugins {
     kotlin("kapt")
     alias(libs.plugins.hilt)
     alias(libs.plugins.protobuf)
+    alias(libs.plugins.qodana)
     jacoco
 }
 
