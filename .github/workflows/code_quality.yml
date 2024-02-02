@@ -14,11 +14,27 @@ jobs:
       pull-requests: write
       checks: write
     steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}  # to check out the actual pull request commit, not the merge commit
-          fetch-depth: 0  # a full history is required for pull request analysis
-      - name: 'Qodana Scan'
-        uses: JetBrains/qodana-action@v2023.3
-        env:
-          QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
+    - uses: actions/checkout@v4
+      with:
+        ref: ${{ github.event.pull_request.head.sha }}  # to check out the actual pull request commit, not the merge commit
+        fetch-depth: 0  # a full history is required for pull request analysis
+
+    - name: Cache gradle packages
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/libs.versions.toml', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+
+    - name: Qodana Scan
+      uses: JetBrains/qodana-action@v2023.3
+      env:
+        QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
+    - name: Build with gradle
+      run: |
+        JAVA_HOME=$JAVA_HOME_17_X64
+        ./gradlew qodanaScan
+
+
