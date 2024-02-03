@@ -18,6 +18,7 @@ package com.amoseui.cameraspecs.data.camera2
 
 import androidx.datastore.core.CorruptionException
 import androidx.datastore.core.Serializer
+import com.amoseui.cameraspecs.data.camera2.proto.CameraData
 import com.google.protobuf.InvalidProtocolBufferException
 import java.io.InputStream
 import java.io.OutputStream

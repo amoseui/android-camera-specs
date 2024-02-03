@@ -25,6 +25,7 @@ import android.hardware.camera2.CameraManager
 import android.hardware.camera2.CameraMetadata
 import android.os.Build
 import androidx.test.core.app.ApplicationProvider
+import com.amoseui.cameraspecs.data.camera2.proto.CameraData
 import com.amoseui.cameraspecs.testing.shadows.ShadowCameraCharacteristicsExtended
 import com.amoseui.cameraspecs.testing.shadows.ShadowCameraExtensionCharacteristics
 import com.amoseui.cameraspecs.testing.shadows.ShadowCameraExtensionManager
