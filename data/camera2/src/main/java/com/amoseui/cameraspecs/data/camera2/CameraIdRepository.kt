@@ -16,7 +16,6 @@
 
 package com.amoseui.cameraspecs.data.camera2
 
-import com.amoseui.cameraspecs.data.camera2.proto.CameraData
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

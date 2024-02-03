@@ -25,7 +25,6 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.datastore.core.DataStore
 import androidx.datastore.dataStore
-import com.amoseui.cameraspecs.data.camera2.proto.CameraData
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
