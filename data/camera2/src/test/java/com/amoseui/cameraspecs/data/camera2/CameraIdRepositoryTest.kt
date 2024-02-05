@@ -112,7 +112,7 @@ class CameraIdRepositoryTest {
         assertFalse(repository.cameraIdStream.first()[3].camera1Legacy)
     }
 
-    @Ignore
+    @Ignore("java.lang.OutOfMemoryError")
     @Test
     @Config(minSdk = Build.VERSION_CODES.P, maxSdk = Build.VERSION_CODES.R)
     fun refreshCameraIdsTest_minSdk_P_maxSdk_R() = runTest {
