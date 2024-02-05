@@ -5,4 +5,4 @@ linter: jetbrains/qodana-jvm-android:2023.3
 exclude:
   - name: All
     paths:
-      - CameraIdSystemDataSource.kt
+      - data/camera2/src/main/java/com/amoseui/cameraspecs/data/camera2/CameraIdSystemDataSource.kt
