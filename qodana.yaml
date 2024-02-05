@@ -2,7 +2,3 @@ version: "1.0"
 profile:
   name: qodana.starter
 linter: jetbrains/qodana-jvm-android:2023.3
-exclude:
-  - name: All
-    paths:
-      - data/camera2/src/main/java/com/amoseui/cameraspecs/data/camera2/CameraIdSystemDataSource.kt
