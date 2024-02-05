@@ -37,8 +37,7 @@ sealed interface CameraIdUiState {
 class CameraIdViewModel @Inject constructor(
     private val cameraIdRepository: CameraIdRepository,
 ) : ViewModel() {
-    
-    val data: Flow<List<CameraIdResource>> = cameraIdRepository.cameraIdStream.map {
+    private val data: Flow<List<CameraIdResource>> = cameraIdRepository.cameraIdStream.map {
         it.map { camera ->
             CameraIdResource(
                 id = camera.cameraId,
