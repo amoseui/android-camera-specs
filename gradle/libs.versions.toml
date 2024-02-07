@@ -42,6 +42,7 @@ hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 [libraries]
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity" }
 compose-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "compose-material3" }
+compose-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "compose" }
 compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version.ref = "compose" }
 datastore = { group = "androidx.datastore", name = "datastore", version.ref = "datastore" }
 hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hilt-navigation" }
