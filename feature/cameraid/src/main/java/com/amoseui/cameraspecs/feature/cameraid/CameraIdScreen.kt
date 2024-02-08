@@ -16,11 +16,12 @@
 
 package com.amoseui.cameraspecs.feature.cameraid
 
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -62,9 +63,7 @@ private fun CameraIdScreen(
         }
         is CameraIdUiState.Success -> {
             LazyVerticalGrid(
-                columns = GridCells.Fixed(2),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                columns = GridCells.Fixed(1),
                 modifier = Modifier.padding(innerPadding),
             ) {
                 items(uiState.cameraIdResources) { cameraResource ->
@@ -77,6 +76,7 @@ private fun CameraIdScreen(
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun CameraIdCard(
     cameraIdResource: CameraIdResource,
@@ -86,32 +86,39 @@ private fun CameraIdCard(
             containerColor = MaterialTheme.colorScheme.surfaceVariant,
         ),
         modifier = Modifier
-            .size(width = 200.dp, height = 200.dp),
+            .size(width = 200.dp, height = 160.dp).padding(horizontal = 10.dp, vertical = 5.dp),
     ) {
-        Text(
-            text = "Camera ID ${cameraIdResource.id}",
-            modifier = Modifier
-                .padding(8.dp),
-            textAlign = TextAlign.Center,
-        )
+        LazyRow {
+            item {
+                Text(
+                    text = "Camera ID ${cameraIdResource.id}",
+                    modifier = Modifier
+                        .padding(horizontal = 10.dp),
+                    textAlign = TextAlign.Center,
+                )
+            }
+            item {
+                Text(
+                    text = cameraIdResource.type.name.lowercase().replaceFirstChar(Char::uppercase),
+                    modifier = Modifier
+                        .padding(horizontal = 4.dp),
+                    textAlign = TextAlign.Center,
+                )
+            }
+        }
+
         Text(
             text = "Camera1: ${cameraIdResource.camera1Legacy}",
             modifier = Modifier
-                .padding(8.dp),
+                .padding(horizontal = 10.dp, vertical = 4.dp),
             textAlign = TextAlign.Center,
         )
-        SuggestionChip(
-            modifier = Modifier
-                .padding(start = 4.dp, bottom = 4.dp),
-            label = { Text(cameraIdResource.type.name.lowercase().replaceFirstChar(Char::uppercase)) },
-            onClick = { },
-        )
-        LazyColumn {
-            items(cameraIdResource.extensions) {
+        FlowRow {
+            cameraIdResource.extensions.forEach { extension ->
                 SuggestionChip(
                     modifier = Modifier
-                        .padding(start = 4.dp, bottom = 4.dp),
-                    label = { Text(it.name) },
+                        .padding(horizontal = 4.dp, vertical = 0.dp),
+                    label = { Text(extension.name) },
                     onClick = { },
                 )
             }
