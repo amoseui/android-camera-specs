@@ -18,6 +18,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.google.services)
     kotlin("kapt")
     alias(libs.plugins.hilt)
     jacoco
@@ -78,6 +79,8 @@ android {
 
 dependencies {
     api(projects.feature.cameraid)
+
+    implementation(platform(libs.firebase))
 
     implementation(libs.activity.compose)
     implementation(libs.compose.material3)
