@@ -25,12 +25,12 @@ plugins {
 
 android {
     namespace = "com.amoseui.cameraspecs"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.amoseui.cameraspecs"
         minSdk = 21
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 10
         versionName = "0.1.0"
 

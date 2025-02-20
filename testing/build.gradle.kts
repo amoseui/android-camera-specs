@@ -21,7 +21,7 @@ plugins {
 
 android {
     namespace = "com.amoseui.cameraspecs.testing"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 21

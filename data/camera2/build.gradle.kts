@@ -26,7 +26,7 @@ plugins {
 
 android {
     namespace = "com.amoseui.cameraspecs.data.camera2"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 21
