@@ -38,8 +38,11 @@ spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 qodana = { id = "org.jetbrains.qodana", version.ref = "qodana" }
 protobuf =  { id = "com.google.protobuf", version.ref = "protobuf" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+google-services = { id = "com.google.gms.google-services", version = "4.4.1" }
 
 [libraries]
+firebase = { group = "com.google.firebase", name = "firebase-bom", version = "32.7.2" }
+
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity" }
 compose-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "compose-material3" }
 compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version.ref = "compose" }

@@ -22,6 +22,7 @@ plugins {
     alias(libs.plugins.kotlinAndroid) apply false
     alias(libs.plugins.kotlinKapt) apply false
     alias(libs.plugins.hilt) apply false
+    alias(libs.plugins.google.services) apply false
     alias(libs.plugins.spotless)
     alias(libs.plugins.qodana)
     alias(libs.plugins.io.gitlab.arturbosch.detekt)
