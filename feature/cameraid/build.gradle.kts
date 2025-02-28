@@ -71,6 +71,7 @@ dependencies {
 
     implementation(libs.activity.compose)
     implementation(libs.compose.material3)
+    implementation(libs.compose.navigation)
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.hilt.navigation.compose)
     implementation(libs.lifecycle.runtime.compose)
